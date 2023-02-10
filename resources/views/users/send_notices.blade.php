@@ -2,13 +2,12 @@
 
 @section('title', $title)
 
-@section('content_title',"Notices")
-@section('content_description',"Send Notices & Push General Notices To Noticeboard")
+@section('content_title',"Уведомления")
 @section('breadcrumbs')
 
 <ol class="breadcrumb">
-    <li><a href="{{route('dash')}}"><i class="fas fa-tachometer-alt"></i>Dashboard</a></li>
-    <li class="active">Here</li>
+    <li><a href="{{route('dash')}}"><i class="fas fa-tachometer-alt"></i>Главная</a></li>
+    <li class="active">Уведомления</li>
 </ol>
 @endsection
 
@@ -29,14 +28,12 @@ $outlet = 'Rural Ayruvedic Hospital Kesbawa'?>
 
                     <li class="@if (!session('success')&&!session('unsuccess')||session('successnotice')) active @endif">
                         <a href="#activity" data-toggle="tab"
-                            aria-expanded="@if (!session('unsuccess')&&!session('success')||session('successnotice')) true @else false @endif">Add
-                            Notice</a>
+                            aria-expanded="@if (!session('unsuccess')&&!session('success')||session('successnotice')) true @else false @endif">Создать уведомление</a>
                     </li>
 
                     <li class="@if (session('success')||session('unsuccess')) active @endif">
                         <a href="#settings" data-toggle="tab"
-                            aria-expanded="@if (session('success') ||session('unsuccess')) true @else false @endif">Send
-                            Notice</a>
+                            aria-expanded="@if (session('success') ||session('unsuccess')) true @else false @endif">Отправить уведомление</a>
                     </li>
 
 
@@ -73,13 +70,13 @@ $outlet = 'Rural Ayruvedic Hospital Kesbawa'?>
                                                 @csrf
                                                 <div class="form-group mb-2">
                                                     <input type="text" class="form-control" name="subject"
-                                                        placeholder="enter subject">
+                                                        placeholder="Введите тему">
                                                 </div>
                                                 <div class="form-group mx-sm-3 mb-2">
                                                     <input type="text" class="form-control" name="description"
-                                                        placeholder="enter description">
+                                                        placeholder="Введите текст">
                                                 </div>
-                                                <button type="submit" class="btn btn-warning mb-2">Add</button>
+                                                <button type="submit" class="btn btn-warning mb-2">Добавить</button>
                                             </form>
                                         </div>
                                         <div class="col-md-2"></div>
@@ -90,10 +87,10 @@ $outlet = 'Rural Ayruvedic Hospital Kesbawa'?>
                                                 role="grid" aria-describedby="example1_info">
                                                 <thead>
                                                     <tr>
-                                                        <th>Subject</th>
-                                                        <th>Description</th>
-                                                        <th>Created At</th>
-                                                        <th>Action</th>
+                                                        <th>Тема</th>
+                                                        <th>Описание</th>
+                                                        <th>Дата создания</th>
+                                                        <th>Действия</th>
 
                                                     </tr>
                                                 </thead>
@@ -117,10 +114,10 @@ $outlet = 'Rural Ayruvedic Hospital Kesbawa'?>
                                                     @endforeach
                                                 </tbody>
                                                 <tfoot>
-                                                    <th>Subject</th>
-                                                    <th>Description</th>
-                                                    <th>Created At</th>
-                                                    <th>Action</th>
+                                                    <th>Тема</th>
+                                                    <th>Описание</th>
+                                                    <th>Дата создания</th>
+                                                    <th>Действия</th>
                                                 </tfoot>
                                             </table>
                                         </div>

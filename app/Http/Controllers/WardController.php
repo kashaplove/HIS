@@ -14,7 +14,7 @@ class WardController extends Controller
 {
     //
     public function index(){
-        $title='Wards';
+        $title='Палаты';
         $docs=User::where(function ($query) {
             $query->where('user_type', '=', 'doctor')
                   ->orWhere('user_type', '=', 'admin');

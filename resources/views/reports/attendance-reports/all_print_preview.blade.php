@@ -43,7 +43,7 @@
 
             <div class="box" id="HTMLtoPDF">
                 <h2 align="center">CENTRAL HOSPITAL OF AYRVEDA</h2>
-                <h4 align="center">Attendance Report</h4>
+                <h4 align="center">Отчеты по приемам</h4>
 
                 <br>
                 <label>Date : @php echo date('Y/m/d'); @endphp</label>

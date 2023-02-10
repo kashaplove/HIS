@@ -3,7 +3,7 @@
 @section('title', $title)
 
 @section('content_title',__("Wards"))
-@section('content_description',__("Ward Management"))
+@section('content_description',__("Управление палатами"))
 @section('breadcrumbs')
 
 <ol class="breadcrumb">

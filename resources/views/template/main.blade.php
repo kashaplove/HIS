@@ -250,9 +250,9 @@ $outlet = 'Rural Ayruvedic Hospital Kesbawa';
             <!-- Logo -->
             <a href="/" class="logo">
                 <!-- mini logo for sidebar mini 50x50 pixels -->
-                <span class="logo-mini">HMS</span>
+                <span class="logo-mini">МИС</span>
                 <!-- logo for regular state and mobile devices -->
-                <span class="logo-lg">Smart Hospitals</span>
+                <span class="logo-lg">Умный доктор</span>
             </a>
 
             <!-- Header Navbar -->
@@ -270,25 +270,6 @@ $outlet = 'Rural Ayruvedic Hospital Kesbawa';
                         <li class="nav-item mr-auto">
                             <p style="padding-top:1.3rem;font-weight:400;margin-right:1.5vw;color:ivory;font-size:1.7rem">
                                 <span class="mr-3" id="today"></span><span id="time"></span></p>
-                        </li>
-
-                        <li class="dropdown messages-menu">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                @if(\Session::get('locale')=='si')
-                                සිං
-                                @else
-                                EN
-                                @endif
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li class="header">Select The Language</li>
-                                <li>
-                                    <ul class="menu">
-                                        <li><a class="text-muted" href="{{route('lang','en')}}">English</a></li>
-                                        <li><a class="text-muted" href="{{route('lang','si')}}">සිංහල</a></li>
-                                    </ul>
-                                </li>
-                            </ul>
                         </li>
 
 
@@ -358,16 +339,23 @@ $outlet = 'Rural Ayruvedic Hospital Kesbawa';
                 <!-- Sidebar Menu -->
 
                 <ul class="sidebar-menu" data-widget="tree">
-                    <li class="header">Main Menu</li>
+                    <li class="header">Главное меню</li>
                     <li class="{{Active::checkRoute('dash')}}"><a href="{{route('dash')}}">
                             <i class="fas fa-tachometer-alt"></i>
-                            <span> Dashboard</span></a>
+                            <span> Главная</span></a>
+                    </li>
+                    {{--add notices--}}
+                    <li class="{{Active::checkRoute('createnoticeview')}}">
+                        <a href="{{route('createnoticeview')}}">
+                            <i class="fas fa-envelope-open-text"></i>
+                            <span> Уведомления</span>
+                        </a>
                     </li>
                     @if($user_type!='Pharmacist')
                     {{--patient--}}
                     <li
                         class="treeview {{Active::checkRoute(['patient','register_in_patient_view','searchPatient','searchData','discharge_inpatient','patientProfileIntro','patientProfile'])}}">
-                        <a href="#"><i class="fas fa-user-injured"></i><span> Patient</span>
+                        <a href="#"><i class="fas fa-user-injured"></i><span> Пациенты</span>
                             <span class="pull-right-container">
                                 <i class="fa fa-angle-left pull-right"></i>
                             </span>
@@ -375,93 +363,44 @@ $outlet = 'Rural Ayruvedic Hospital Kesbawa';
                         <ul class="treeview-menu">
                             <li class="{{Active::checkRoute('patient')}}"><a href="{{route('patient')}}"></i><i
                                         class="fas fa-user-plus" aria-hidden="true"></i>
-                                    Register New</a></li>
+                                    Добавить нового</a></li>
 
                             <li class="{{Active::checkRoute(['searchPatient','searchData'])}}"><a
                                     href="{{route('searchPatient')}}"></i><i class="fas fa-search"
-                                        aria-hidden="true"></i> Search Patient</a>
+                                        aria-hidden="true"></i> Найти пациента</a>
                             </li>
 
                             <li class="{{Active::checkRoute(['patientProfileIntro','patientProfile'])}}"><a
                                     href="{{route('patientProfileIntro')}}"></i><i class="fas fa-id-card"
-                                        aria-hidden="true"></i> Patient Profile</a>
+                                        aria-hidden="true"></i> Профиль пациента</a>
                             </li>
-
-                            {{--register in patient--}}
-                            <li class="{{Active::checkRoute('register_in_patient_view')}}"><a
-                                    href="{{route('register_in_patient_view')}}"><i class="fas fa-user-plus"
-                                    area-hidden="true"></i><span> Register In Patient</span></a>
-                            </li>
-
-                            @if($user_type=='Doctor' || $user_type=='Admin')
-                            {{--discharge in patient--}}
-                            <li class="{{Active::checkRoute('discharge_inpatient')}}"><a
-                                    href="{{route('discharge_inpatient')}}"><i class="fa fa-hospital-o"
-                                        area-hidden="true">
-                                    </i><span>Discharge In Patient</span></a>
-                            </li>
-                            @endif
 
                         </ul>
                     </li>
-                    @endif
-                    @if($user_type!='Pharmacist')
-                    {{--create channel--}}
-                    <li class="{{Active::checkRoute('create_channel_view')}}">
-                        <a href="{{route('create_channel_view')}}">
-                            <i class="fas fa-folder-plus"></i>
-                            <span> Create Appoinment</span>
-                        </a>
-                    </li>
-                    @endif
-                    @if($user_type=='Admin' || $user_type=='Doctor')
-                    {{--check patient--}}
-                    <li class="{{Active::checkRoute('check_patient_view')}}"><a
-                            href="{{route('check_patient_view')}}"><i class="fas fa-procedures"></i><span> Check
-                                Patient</span></a></li>
                     @endif
 
                     @if($user_type=='Pharmacist' || $user_type=='Admin')
                     {{--Issue Medicine--}}
                     <li class="{{Active::checkRoute('issueMedicineView')}}"><a href="{{route('issueMedicineView')}}"><i
-                                class="fa fa-plus-square"></i><span>Issue Medicine</span></a></li>
+                                class="fa fa-plus-square"></i><span>Медицина</span></a></li>
                     @endif
-
-                    <li class="treeview {{Active::checkRoute(['attendmore','myattend'])}}">
-                        <a href="#"><i class="fas fa-calendar-check"></i></i><span> Attendance</span>
-                            <span class="pull-right-container">
-                                <i class="fa fa-angle-left pull-right"></i>
-                            </span>
-                        </a>
-                        <ul class="treeview-menu">
-                            <li class="{{Active::checkRoute('myattend')}}"><a href="{{route('myattend')}}"><i
-                                        class="fas fa-calendar-day" aria-hidden="true"></i>&nbsp; My
-                                    Attendance</a></li>
-                            @if($user_type=='Admssin')
-                            <li class="{{Active::checkRoute('attendmore')}}"><a href="{{route('attendmore')}}"><i
-                                        class="fas fa-plus-square" aria-hidden="true"></i>&nbsp; More</a></li>
-                            @endif
-                        </ul>
-                    </li>
 
                     @if($user_type=='Admin')
                     {{-- Users Operations --}}
 
                     <li class="{{Active::checkRoute(['newuser','regfinger','resetuser'])}} treeview">
-                        <a href="#"><i class="fas fa-users-cog"></i><span> Users</span>
+                        <a href="#"><i class="fas fa-users-cog"></i><span> Пользователи</span>
                             <span class="pull-right-container">
                                 <i class="fa fa-angle-left pull-right"></i>
                             </span>
                         </a>
                         <ul class="treeview-menu">
                             <li class="{{Active::checkRoute('newuser')}}"><a href="{{route('newuser')}}"><i
-                                        class="fa fa-user-plus" aria-hidden="true"></i>New
-                                    User</a></li>
+                                        class="fa fa-user-plus" aria-hidden="true"></i>Добавить нового</a></li>
                             <li class="{{Active::checkRoute('regfinger')}}"><a href="{{route('regfinger')}}"><i
-                                        class="fa fa-fingerprint" aria-hidden="true"></i>Register Fingerprint</a></li>
+                                        class="fa fa-fingerprint" aria-hidden="true"></i>Зарегистрировать отпечаток пальца</a></li>
                             <li class="{{Active::checkRoute('resetuser')}}"><a href="{{route('resetuser')}}"><i
-                                        class="fa fa-user-edit" aria-hidden="true"></i>Reset
-                                    User</a></li>
+                                        class="fa fa-user-edit" aria-hidden="true"></i>Удалить пользователя</a></li>
                         </ul>
                     </li>
                     @endif
@@ -469,24 +408,14 @@ $outlet = 'Rural Ayruvedic Hospital Kesbawa';
                     {{-- Profile --}}
 
                     <li class="{{Active::checkRoute('profile')}}"><a href="{{route('profile')}}"><i
-                                class="fas fa-user"></i><span> Profile</span></a></li>
+                                class="fas fa-user"></i><span> Профиль</span></a></li>
 
                     {{-- Wards --}}
 
                     @if($user_type!="Pharmacist")
                     <li class="{{Active::checkRoute('wards')}}"><a href="{{route('wards')}}"><i
                                 class="fas fa-warehouse"></i>
-                            <span>&nbsp;Wards</span></a></li>
-                    @endif
-
-                    @if($user_type=="Admin")
-                    {{--add notices--}}
-                    <li class="{{Active::checkRoute('createnoticeview')}}">
-                        <a href="{{route('createnoticeview')}}">
-                            <i class="fas fa-envelope-open-text"></i>
-                            <span> Notices</span>
-                        </a>
-                    </li>
+                            <span>&nbsp;Палаты</span></a></li>
                     @endif
 
                     @if($user_type=="Admin"||$user_type=="Doctor")
@@ -494,7 +423,7 @@ $outlet = 'Rural Ayruvedic Hospital Kesbawa';
                     <li class="{{Active::checkRoute(['stats','stats_old'])}}">
                         <a href="{{route('stats')}}">
                             <i class="fas fa-chart-line"></i></i>
-                            <span> Statistics</span>
+                            <span> Статистика</span>
                         </a>
                     </li>
                     @endif
@@ -505,7 +434,7 @@ $outlet = 'Rural Ayruvedic Hospital Kesbawa';
                         class="treeview {{Active::checkRoute(['inPatientReport','inPatientReportData','clinic_reports','mob_clinic_report','mon_stat_report','out_p_report','attendance_report'])}}">
                         <a href="#">
                             <i class="fas fa-sticky-note"></i>
-                            <span> Report Generation</span>
+                            <span> Генерация отчетов</span>
                             <span class="pull-right-container">
                                 <i class="fa fa-angle-left pull-right"></i>
                             </span>
@@ -514,32 +443,14 @@ $outlet = 'Rural Ayruvedic Hospital Kesbawa';
                             @if($user_type=="Admin"||$user_type=="Doctor")
                             <li class="{{Active::checkRoute('clinic_reports')}}"><a
                                     href="{{route('clinic_reports')}}"><i class="fa fa-stethoscope"
-                                        aria-hidden="true"></i> Clinic Report</a></li>
+                                        aria-hidden="true"></i> Прогнозирование</a></li>
                             @endif
 
-                            @if($user_type=="Admin"||$user_type=="Doctor")
-                            <li class="{{Active::checkRoute('mon_stat_report')}}"><a
-                                    href="{{route('mon_stat_report')}}"><i class="fa fa-sticky-note"
-                                        aria-hidden="true"></i> Monthly Statistic Report</a></li>
-                            @endif
-
-
-                            <li class="{{Active::checkRoute(['inPatientReport','inPatientReportData'])}}"><a
-                                    href="{{route('inPatientReport')}}"><i class="fa fa-hospital-o"
-                                        area-hidden="true"></i><span>In Patient Stats</span></a>
-                            </li>
 
                             <li class="{{Active::checkRoute('attendance_report')}}"><a
-                                    href="{{route('attendance_report')}}"><i class="fa fa-clipboard
-                                        aria-hidden=" true"></i> Attendance Report</a></li>
+                                    href="{{route('attendance_report')}}"><i class="fa fa-clipboard"
+                                        aria-hidden="true"></i> Отчеты по приемам</a></li>
                         </ul>
-                    </li>
-
-                    <li>
-                        <a href="https://adminlte.io/themes/AdminLTE/index2.html" target="_blank">
-                            <i class="fas fa-folder-plus"></i>
-                            <span> Template</span>
-                        </a>
                     </li>
 
                 </ul>
@@ -568,16 +479,6 @@ $outlet = 'Rural Ayruvedic Hospital Kesbawa';
             <!-- /.content -->
         </div>
         <!-- /.content-wrapper -->
-
-        <!-- Main Footer -->
-        <footer class="main-footer">
-            <!-- To the right -->
-            <div class="pull-right hidden-xs">
-                Version 1.0
-            </div>
-            <!-- Default to the left -->
-            <strong>Copyright &copy; {{date('Y')}} <a href="#">Smart Hospital Systems</a>.</strong> All rights reserved.
-        </footer>
 
 
 

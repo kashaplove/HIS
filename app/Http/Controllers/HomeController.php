@@ -37,7 +37,7 @@ class HomeController extends Controller
         $inpatientcnt = DB::table('inpatients')->where('discharged', '=', 'NO')->count(DB::raw('distinct id'));
 
         return view('dash', [
-            'title' => 'Dashboard',
+            'title' => 'Главная',
             'notices' => $notice,
             'doctorcnt'=> $doctorcnt,
             'generalcnt'=> $generalcnt,

@@ -2,7 +2,7 @@
 
 @section('title', $title)
 
-@section('content_title',__("Patient Profile"))
+@section('content_title',__("Профиль пациента"))
 @section('content_description',"")
 @section('breadcrumbs')
 
@@ -19,7 +19,7 @@
     <div class="col-md-10">
         <div class="box box-success mt-5">
             <div class="box-header with-border">
-                <h3 class="box-title">{{__('Patient Profile')}}</h3>
+                <h3 class="box-title">{{__('Профиль пациента')}}</h3>
             </div>
             <div class="box-body">
                 <form class="pl-5 pr-5 pb-5" method="get" action="{{route('patientProfileIntro')}}">

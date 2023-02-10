@@ -2,12 +2,12 @@
 
 @section('title', $title)
 
-@section('content_title',"General Statistics & Analytics For The Year ".$year)
+@section('content_title',"Общая статистика и аналитика за ".$year." год")
 @section('breadcrumbs')
 
 <ol class="breadcrumb">
-    <li><a href="{{route('dash')}}"><i class="fas fa-tachometer-alt"></i>Dashboard</a></li>
-    <li class="active">Here</li>
+    <li><a href="{{route('dash')}}"><i class="fas fa-tachometer-alt"></i>Главная</a></li>
+    <li class="active">Статистика</li>
 </ol>
 @endsection
 
@@ -18,7 +18,7 @@
 
 <div class="row">
     <div class="col-md-12">
-        <h4>Summary For ({{date('F, Y')}})</h4><br>
+        <h4>Данные за {{date('F, Y')}}</h4><br>
     </div>
 </div>
 
@@ -28,7 +28,7 @@
             <span class="info-box-icon bg-aqua"><i class="fas fa-user-injured"></i></span>
 
             <div class="info-box-content">
-                <span class="info-box-text">Out Patients</span>
+                <span class="info-box-text">Выписанные пациенты</span>
                 <span class="info-box-number">{{$out_patients_this_month}}</span>
             </div>
             <!-- /.info-box-content -->
@@ -41,7 +41,7 @@
             <span class="info-box-icon bg-green"><i class="fas fa-procedures"></i></span>
 
             <div class="info-box-content">
-                <span class="info-box-text">In Patients</span>
+                <span class="info-box-text">Текущие пациенты</span>
                 <span class="info-box-number">{{$in_patients_this_month}}</span>
             </div>
             <!-- /.info-box-content -->
@@ -54,7 +54,7 @@
             <span class="info-box-icon bg-red "><i class="fas fa-user-injured"></i></span>
 
             <div class="info-box-content">
-                <span class="info-box-text">New Patients</span>
+                <span class="info-box-text">Новые пациенты</span>
                 <span class="info-box-number">{{$new_patient_regs_this_month}}</span>
             </div>
             <!-- /.info-box-content -->
@@ -67,7 +67,7 @@
             <span class="info-box-icon bg-yellow"><i class="far fa-hospital"></i></span>
 
             <div class="info-box-content">
-                <span class="info-box-text">Total Checkings</span>
+                <span class="info-box-text">Всего обследований</span>
                 <span class="info-box-number">{{$total_checkings_this_month}}</span>
             </div>
             <!-- /.info-box-content -->
@@ -82,7 +82,7 @@
     <div class="col-md-12">
         <div class="box box-dark">
             <div class="box-header with-border">
-                <h3 class="box-title">Patient Statistics For The Year({{$year}})</h3>
+                <h3 class="box-title">Статистика по пациентам за {{$year}} год</h3>
                 <div class="box-tools pull-right">
                     <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
                     </button>
@@ -92,22 +92,22 @@
             </div>
             <div class="box-body">
                 <div>
-                    <p class="h4">All below graphs displays statistics for the year {{$year}},to view different years
-                        select the
-                        year
-                        below and submit.</p>
+                    <p class="h4">Все приведенные ниже графики отображают статистику за  {{$year}} год, для просмотра другого периода выберите другой год</p>
                     <div class="col-xs-4 m-0 p-0">
                         <form class="m-0 p-0 mb-3 mt-3" method="POST" action="{{route('stats_old')}}">
                             @csrf
-                            <label for="year">Select Different Year</label>
+                            <label for="year">Выбрать другой год</label>
                             <div class="input-group input-group">
                                 <select class="form-control" name="year" id="year">
                                     <option @if($year==2018) selected @endif value="2018">2018</option>
                                     <option @if($year==2019) selected @endif value="2019">2019</option>
                                     <option @if($year==2020) selected @endif value="2020">2020</option>
+                                    <option @if($year==2021) selected @endif value="2021">2021</option>
+                                    <option @if($year==2022) selected @endif value="2022">2022</option>
+                                    <option @if($year==2023) selected @endif value="2023">2023</option>
                                 </select>
                                 <span class="input-group-btn">
-                                    <button type="submit" class="btn btn-info btn-flat">Fetch <i
+                                    <button type="submit" class="btn btn-info btn-flat">Получить данные <i
                                             class="fas fa-arrow-right"></i></button>
                                 </span>
                             </div>
@@ -121,7 +121,7 @@
                     <div class="col-md-12">
                         <div class="box box-success">
                             <div class="box-header with-border">
-                                <h3 class="box-title">Monthly Outpatients Attendance</h3>
+                                <h3 class="box-title">Ежемесячная посещаемость амбулаторных пациентов</h3>
 
                                 <div class="box-tools pull-right">
                                     <button type="button" class="btn btn-box-tool" data-widget="collapse"><i
@@ -143,19 +143,19 @@
 
                 <script>
                     var ctx = document.getElementById("outPatientMonthlyStat").getContext("2d");
-                
+
                 var OutPatientData = {
-                    labels: ["January", "February", "March","April","May","June","July","August","September","October","November","December"],
+                    labels: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'],
                     datasets: [
                         {
-                            label: "Male",
+                            label: "Мужчины",
                             backgroundColor: "RGBA(0,83,156,0.81)",
                             data: [
                                 @php
                                 use App\Appointment;
                                 $i=1;
                                 while($i<13){
-                                    echo (Appointment::getMonthCount($year,$i,'Male','OUT'));
+                                    echo (Appointment::getMonthCount(2023,$i,'Мужчины','OUT'));
                                     echo (",");
                                     $i++;
                                 }
@@ -163,13 +163,13 @@
                             ]
                         },
                         {
-                            label: "Female",
+                            label: "Женщины",
                             backgroundColor: "RGBA(206,91,120,0.51)",
                             data: [
                                 @php
                                 $i=1;
                                 while($i<13){
-                                    echo (Appointment::getMonthCount($year,$i,'Female','OUT'));
+                                    echo (Appointment::getMonthCount(2023,$i,'Женщины','OUT'));
                                     echo (",");
                                     $i++;
                                 }
@@ -177,13 +177,13 @@
                             ]
                         },
                         {
-                            label: "All",
+                            label: "Все",
                             backgroundColor: "RGBA(63,191,88,0.82)",
                             data: [
                                 @php
                                 $i=1;
                                 while($i<13){
-                                    echo (Appointment::getTotalCount($year,$i,'OUT'));
+                                    echo (Appointment::getTotalCount(2023,$i,'OUT'));
                                     echo (",");
                                     $i++;
                                 }
@@ -192,13 +192,13 @@
                         }
                     ]
                 };
-                
+
                 var outPatientMonthlyStat = new Chart(ctx, {
                     type: 'bar',
                     data: OutPatientData,
                     options: {
                         title:{
-                            text:"Monthly Outpatients Overview",
+                            text:"Ежемесячная посещаемость амбулаторных пациентов",
                             display:true,
                             position:'top',
                             fontSize:16,
@@ -219,7 +219,7 @@
                     <div class="col-md-12">
                         <div class="box box-success">
                             <div class="box-header with-border">
-                                <h3 class="box-title">Monthly Inpatients Admissions</h3>
+                                <h3 class="box-title">Ежемесячный прием стационарных больных</h3>
 
                                 <div class="box-tools pull-right">
                                     <button type="button" class="btn btn-box-tool" data-widget="collapse"><i
@@ -241,18 +241,18 @@
 
                 <script>
                     var ctx = document.getElementById("inPatientMonthlyStat").getContext("2d");
-                
+
                 var InPatientData = {
-                    labels: ["January", "February", "March","April","May","June","July","August","September","October","November","December"],
+                    labels: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'],
                     datasets: [
                         {
-                            label: "Male",
+                            label: "Мужчины",
                             backgroundColor: "RGBA(0,83,156,0.81)",
                             data: [
                                 @php
                                 $i=1;
                                 while($i<13){
-                                    echo (Appointment::getMonthCount($year,$i,'Male','IN'));
+                                    echo (Appointment::getMonthCount(2023,$i,'Мужчины','IN'));
                                     echo (",");
                                     $i++;
                                 }
@@ -260,13 +260,13 @@
                             ]
                         },
                         {
-                            label: "Female",
+                            label: "Женщины",
                             backgroundColor: "RGBA(206,91,120,0.51)",
                             data: [
                                 @php
                                 $i=1;
                                 while($i<13){
-                                    echo (Appointment::getMonthCount($year,$i,'Female','IN'));
+                                    echo (Appointment::getMonthCount(2023,$i,'Женщины','IN'));
                                     echo (",");
                                     $i++;
                                 }
@@ -274,13 +274,13 @@
                             ]
                         },
                         {
-                            label: "All",
+                            label: "Все",
                             backgroundColor: "RGBA(63,191,88,0.82)",
                             data: [
                                 @php
                                 $i=1;
                                 while($i<13){
-                                    echo (Appointment::getTotalCount($year,$i,'IN'));
+                                    echo (Appointment::getTotalCount(2023,$i,'IN'));
                                     echo (",");
                                     $i++;
                                 }
@@ -289,13 +289,13 @@
                         }
                     ]
                 };
-                
+
                 var inPatientMonthlyStat = new Chart(ctx, {
                     type: 'bar',
                     data: InPatientData,
                     options: {
                         title:{
-                            text:"Monthly Inpatients Overview",
+                            text:"Ежемесячный прием стационарных больных",
                             display:true,
                             position:'top',
                             fontSize:16,
@@ -316,7 +316,7 @@
                     <div class="col-md-12">
                         <div class="box box-success">
                             <div class="box-header with-border">
-                                <h3 class="box-title">Monthly New Patient Registrations</h3>
+                                <h3 class="box-title">Ежемесячная регистрация новых пациентов</h3>
 
                                 <div class="box-tools pull-right">
                                     <button type="button" class="btn btn-box-tool" data-widget="collapse"><i
@@ -339,19 +339,19 @@
 
                 <script>
                     var ctx = document.getElementById("newRegsMonthlyStat").getContext("2d");
-                
+
                 var newRegsMonthlyStat = {
-                    labels: ["January", "February", "March","April","May","June","July","August","September","October","November","December"],
+                    labels: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'],
                     datasets: [
                         {
-                            label: "Male",
+                            label: "Мужчины",
                             backgroundColor: "RGBA(0,83,156,0.81)",
                             data: [
                                 @php
                                 use App\Patients;
                                 $i=1;
                                 while($i<13){
-                                    echo (Patients::regsMonth($year,$i,'Male'));
+                                    echo (Patients::regsMonth(2023,$i,'Мужчины'));
                                     echo (",");
                                     $i++;
                                 }
@@ -359,13 +359,13 @@
                             ]
                         },
                         {
-                            label: "Female",
+                            label: "Женщины",
                             backgroundColor: "RGBA(206,91,120,0.51)",
                             data: [
                                 @php
                                 $i=1;
                                 while($i<13){
-                                    echo (Patients::regsMonth($year,$i,'Female'));
+                                    echo (Patients::regsMonth(2023,$i,'Женщины'));
                                     echo (",");
                                     $i++;
                                 }
@@ -373,13 +373,13 @@
                             ]
                         },
                         {
-                            label: "All",
+                            label: "Все",
                             backgroundColor: "RGBA(63,191,88,0.82)",
                             data: [
                                 @php
                                 $i=1;
                                 while($i<13){
-                                    echo (Patients::totalRegs($year,$i));
+                                    echo (Patients::totalRegs(2023,$i));
                                     echo (",");
                                     $i++;
                                 }
@@ -388,13 +388,13 @@
                         }
                     ]
                 };
-                
+
                 var newRegsMonthlyStat = new Chart(ctx, {
                     type: 'bar',
                     data: newRegsMonthlyStat,
                     options: {
                         title:{
-                            text:"Monthly New Patient Registrations",
+                            text:"Ежемесячная регистрация новых пациентов",
                             display:true,
                             position:'top',
                             fontSize:16,
@@ -488,10 +488,10 @@
     var ctx = document.getElementById("medicineDougnet").getContext("2d");
 
     data = {
-    datasets: 
+    datasets:
     [
         {
-            data: 
+            data:
             [
             @foreach ($top_ten_meds as $medicine)
                 @if($medicine->qty>0)
@@ -512,16 +512,16 @@
 
     // These labels appear in the legend and in the tooltips when hovering different arcs
     labels: [
-        
-    
+
+
     @foreach ($top_ten_meds as $medicine)
         @if($medicine->qty>0)
             '{{$medicine->name_sinhala}}',
         @endif
     @endforeach
-        
+
     ],
-    
+
 };
 
 
@@ -551,10 +551,10 @@ var myDoughnutChart = new Chart(ctx, {
 var ctx = document.getElementById("medicineDougnetMonth").getContext("2d");
 
 medicineDougnetMonth = {
-    datasets: 
+    datasets:
     [
         {
-            data: 
+            data:
             [
             @foreach ($this_month_meds as $medicine)
                 @if($medicine->issues>0)
@@ -575,16 +575,16 @@ medicineDougnetMonth = {
 
     // These labels appear in the legend and in the tooltips when hovering different arcs
     labels: [
-        
-    
+
+
     @foreach ($this_month_meds as $medicine)
         @if($medicine->issues>0)
             '{{$medicine->name_sinhala}}',
         @endif
     @endforeach
-        
+
     ],
-    
+
 };
 
 

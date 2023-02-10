@@ -270,26 +270,6 @@ $outlet = 'Rural Ayruvedic Hospital Kesbawa';
                                 <span class="mr-3" id="today"></span><span id="time"></span></p>
                         </li>
 
-                        <li class="dropdown messages-menu">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                @if(\Session::get('locale')=='si')
-                                සිං
-                                @else
-                                EN
-                                @endif
-
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li class="header">Select The Language</li>
-                                <li>
-                                    <ul class="menu">
-                                        <li><a class="text-muted" href="{{route('lang','en')}}">English</a></li>
-                                        <li><a class="text-muted" href="{{route('lang','si')}}">සිංහල</a></li>
-                                    </ul>
-                                </li>
-
-                            </ul>
-                        </li>
 
 
                         <!-- User Account Menu -->
@@ -358,11 +338,11 @@ $outlet = 'Rural Ayruvedic Hospital Kesbawa';
                 <!-- Sidebar Menu -->
 
                 <ul class="sidebar-menu" data-widget="tree">
-                    <li class="header">Main Menu</li>
+                    <li class="header">Главное меню</li>
 
                     @yield('sidebar_content')
 
-                   
+
                 </ul>
                 </li>
 

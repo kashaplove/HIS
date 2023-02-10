@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
@@ -20,8 +21,8 @@ class CreateAttendancesTable extends Migration
             $table->timestamp('start');
             $table->timestamp('end')->nullable();
             $table->timestamps();
+            $table->unique(['user_id', 'start']);
         });
-        DB::unprepared('ALTER TABLE attendances ADD UNIQUE KEY(`user_id`,`start`)');
     }
 
     /**

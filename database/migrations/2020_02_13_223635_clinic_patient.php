@@ -20,8 +20,8 @@ class ClinicPatient extends Migration
             $table->foreign('clinic_id')->references('id')->on('clinics');
             $table->foreign('patients_id')->references('id')->on('patient');
             $table->timestamps();
+            $table->unique(['patients_id', 'clinic_id']);
         });
-        DB::unprepared('ALTER TABLE clinic_patient ADD UNIQUE KEY(`patients_id`,`clinic_id`)');
     }
 
     /**

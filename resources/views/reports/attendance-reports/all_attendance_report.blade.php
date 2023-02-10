@@ -2,8 +2,7 @@
 
 @section('title', $title)
 
-@section('content_title',"Attendance Report")
-@section('content_description',"Generate Your Report Here...")
+@section('content_title',"Отчеты по приемам")
 @section('breadcrumbs')
 
     <ol class="breadcrumb">

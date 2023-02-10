@@ -35,8 +35,8 @@ class Patients extends Model
         $sex = ucfirst(strtolower($sex));
         $c = DB::table('patients')
             ->where('patients.sex', $sex)
-            ->whereRaw("MONTH(created_at)= $month")
-            ->whereRaw("YEAR(created_at)= $year")
+            ->whereRaw("strftime('%m', created_at)= $month")
+            ->whereRaw("strftime('%Y', created_at)= $year")
             ->count();
 
         return $c;
@@ -45,8 +45,8 @@ class Patients extends Model
     public static function totalRegs($year, $month)
     {
         $c = DB::table('patients')
-            ->whereRaw("MONTH(created_at)= $month")
-            ->whereRaw("YEAR(created_at)= $year")
+            ->whereRaw("strftime('%m', created_at)= $month")
+            ->whereRaw("strftime('%Y', created_at)= $year")
             ->count();
 
         return $c;

@@ -10,7 +10,7 @@ use App\Appointment;
 use App\Prescription_Medicine;
 //use App\Appointment;
 //use File;
-use DB;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Arr;
@@ -41,7 +41,7 @@ class MedicineController extends Controller
                 "prescription"=>$request->medid,
             ]);
         }
-        
+
     }
 
     public function medIssueSave(Request $request){
@@ -54,7 +54,7 @@ class MedicineController extends Controller
         } catch (\Throwable $th) {
            return redirect()->back()->with('error',"Unkown Error Occured");
         }
-        
+
     }
 
     public function searchSuggestion(Request $request)
@@ -91,13 +91,13 @@ class MedicineController extends Controller
     {
         $num = $request->pNum;
         $numlength = strlen((string) $num);
-        
+
         if ($numlength < 7) {  //if appointemnt number have been given
             $app=Appointment::whereRaw('date(created_at)=CURDATE()')
                             ->where('number',$num)
                             ->orderBy('created_at','DESC')
                             ->first();
-          
+
             if ($app) {
                 $rec=Prescription::where('appointment_id',$app->id)->first();
                 return response()->json([
@@ -112,7 +112,7 @@ class MedicineController extends Controller
                     "exist" => false,
                 ]);
             }
-        } 
+        }
         else { //if patient registration number have been given
             $app=Appointment::whereRaw('date(created_at)=CURDATE()')
                             ->where('patient_id',$num)
@@ -137,9 +137,9 @@ class MedicineController extends Controller
             }
         }
 
-        
+
     }
 
-  
+
 }
 

@@ -2,13 +2,12 @@
 
 @section('title', ucfirst($title))
 
-@section('content_title',"User Profile")
-@section('content_description',"Personalize Your Account")
+@section('content_title',"Мой профиль")
 @section('breadcrumbs')
 
 <ol class="breadcrumb">
-    <li><a href="{{route('dash')}}"><i class="fas fa-tachometer-alt"></i>Dashboard</a></li>
-    <li class="active">Here</li>
+    <li><a href="{{route('dash')}}"><i class="fas fa-tachometer-alt"></i>Главная</a></li>
+    <li class="active">Мой профиль</li>
 </ol>
 @endsection
 
@@ -34,14 +33,13 @@ $outlet = 'Rural Ayruvedic Hospital Kesbawa'?>
                     <li
                         class="@if (!(session('success') || session('errors') ||session('errorpw') || session('successpw')||session('successcn')||session('successedit'))) active @endif">
                         <a href="#activity" data-toggle="tab"
-                            aria-expanded="@if (session('success') || session('errors')||session('errorpw') || session('successpw')||session('successcn')||session('successedit')) false @else true @endif">Activity
-                            Log</a>
+                            aria-expanded="@if (session('success') || session('errors')||session('errorpw') || session('successpw')||session('successcn')||session('successedit')) false @else true @endif">События</a>
                     </li>
 
                     <li
                         class="@if (session('success') || session('errors') ||session('errorpw') || session('successpw')||session('successcn')||session('successedit') ) active @endif">
                         <a href="#settings" data-toggle="tab"
-                            aria-expanded="@if (session('success') || session('errors')||session('errorpw') || session('successpw')||session('successcn')||session('successedit')) true @else false @endif">Settings</a>
+                            aria-expanded="@if (session('success') || session('errors')||session('errorpw') || session('successpw')||session('successcn')||session('successedit')) true @else false @endif">Настройки</a>
                     </li>
 
                 </ul>
@@ -70,12 +68,9 @@ $outlet = 'Rural Ayruvedic Hospital Kesbawa'?>
                                                 role="grid" aria-describedby="example1_info">
                                                 <thead>
                                                     <tr>
-                                                        <th>Description</th>
-                                                        <th>Subject Id</th>
-                                                        <th>Subject Type</th>
-                                                        <th>Causer Type</th>
-
-                                                        <th>Created At</th>
+                                                        <th>Описание</th>
+                                                        <th>Тема</th>
+                                                        <th>Дата создания</th>
 
                                                     </tr>
                                                 </thead>
@@ -84,19 +79,15 @@ $outlet = 'Rural Ayruvedic Hospital Kesbawa'?>
                                                     <tr>
                                                         <td>{{$app->description}}</td>
                                                         <td>{{$app->subject_id}}</td>
-                                                        <td>{{explode('\\',$app->subject_type)[1]}}</td>
-                                                        <td>{{$app->causer_type}}</td>
                                                         <td>{{$app->created_at}}</td>
 
                                                     </tr>
                                                     @endforeach
                                                 </tbody>
                                                 <tfoot>
-                                                    <th>Description</th>
-                                                    <th>Subject Id</th>
-                                                    <th>Subject Type</th>
-                                                    <th>Causer Type</th>
-                                                    <th>Created At</th>
+                                                    <th>Описание</th>
+                                                    <th>Тема</th>
+                                                    <th>Дата создания</th>
 
                                                 </tfoot>
                                             </table>
@@ -125,7 +116,7 @@ $outlet = 'Rural Ayruvedic Hospital Kesbawa'?>
                                 <ul class="nav nav-pills nav-stacked">
 
                                     <li><a data-toggle="collapse" href="#editprofile" class="collapsed"
-                                            aria-expanded="false"><i class="fa fa-signature"></i> Edit Profile</a></li>
+                                            aria-expanded="false"><i class="fa fa-signature"></i> Редактировать профиль</a></li>
 
                                     <div id="editprofile"
                                         class="panel-collapse @if (session('successedit')) collapse in @else collapse @endif"
@@ -400,17 +391,17 @@ $outlet = 'Rural Ayruvedic Hospital Kesbawa'?>
 
                     <ul class="list-group list-group-unbordered">
                         <li class="list-group-item">
-                            <b>User ID :</b> <a class="pull-right">{{$id}}</a>
+                            <b>ID :</b> <a class="pull-right">{{$id}}</a>
                         </li>
                         <li class="list-group-item">
                             <b>Email :</b> <a class="">{{$email}}</a>
                         </li>
                         <li class="list-group-item">
-                            <b>Contact No :</b> <a class="pull-right">{{$tp}}</a>
+                            <b>Контактный номер :</b> <a class="pull-right">{{$tp}}</a>
                         </li>
                     </ul>
 
-                    <a href="#" class="btn btn-warning btn-block"><b>Edit Profile</b></a>
+                    <a href="#" class="btn btn-warning btn-block"><b>Редактировать профиль</b></a>
                 </div>
                 <!-- /.box-body -->
             </div>
@@ -420,12 +411,12 @@ $outlet = 'Rural Ayruvedic Hospital Kesbawa'?>
             <div class="box box-success">
 
                 <div class="box-header with-border">
-                    <h3 class="box-title">About Me</h3>
+                    <h3 class="box-title">Обо мне</h3>
                 </div>
                 <!-- /.box-header -->
 
                 <div class="box-body">
-                    <strong><i class="fa fa-book margin-r-5"></i> Education</strong>
+                    <strong><i class="fa fa-book margin-r-5"></i> Образование</strong>
 
                     <p class="text-muted">
                         {{$education}}
@@ -433,24 +424,24 @@ $outlet = 'Rural Ayruvedic Hospital Kesbawa'?>
 
                     <hr>
 
-                    <strong><i class="fa fa-map-marker margin-r-5"></i> Location</strong>
+                    <strong><i class="fa fa-map-marker margin-r-5"></i> Адрес</strong>
 
                     <p class="text-muted">{{$location}}</p>
 
                     <hr>
 
-                    <strong><i class="fa fa-pencil-alt margin-r-5"></i> Skills</strong>
+                    <strong><i class="fa fa-pencil-alt margin-r-5"></i> Особые качества</strong>
                     <br>
-                    <span styles="display:inline-block;" class="label label-danger">Communication Skills</span>
-                    <span styles="display:inline-block;" class="label label-success">Emotional Intelligence</span>
-                    <span styles="display:inline-block;" class="label label-info">Problem-Solving Skills</span>
-                    <span styles="display:inline-block;" class="label label-primary">Decision-Making Skills</span>
+                    <span styles="display:inline-block;" class="label label-danger">Общительность</span>
+                    <span styles="display:inline-block;" class="label label-success">Эмоциональный интеллект</span>
+                    <span styles="display:inline-block;" class="label label-info">Навыки решения проблем</span>
+                    <span styles="display:inline-block;" class="label label-primary">Навыки принятия решений</span>
                     <br>
                     {{$skills}}
 
                     <hr>
 
-                    <strong><i class="fas fa-sticky-note margin-r-5"></i> Notes</strong>
+                    <strong><i class="fas fa-sticky-note margin-r-5"></i> Заметки</strong>
 
                     <p>{{$notes}}</p>
                 </div>

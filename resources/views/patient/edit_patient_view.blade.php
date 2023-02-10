@@ -2,12 +2,11 @@
 
 @section('title', $title)
 
-@section('content_title',"Dashboard")
-@section('content_description',"Operate All The Things Here")
+@section('content_title',"Главная")
 @section('breadcrumbs')
 <ol class="breadcrumb">
-    <li><a href="#"><i class="fas fa-tachometer-alt"></i>Dashboard</a></li>
-    <li class="active">Here</li>
+    <li><a href="#"><i class="fas fa-tachometer-alt"></i>Главная</a></li>
+    <li class="active">Редактирование информации о пациенте</li>
 </ol>
 
 @endsection
@@ -21,62 +20,69 @@
             <!-- Horizontal Form -->
             <div class="box box-info">
                 <div class="box-header with-border">
-                    <h3 class="box-title">{{__('Edit Patient')}}</h3>
+                    <h3 class="box-title">{{__('Редактирование информации о пациенте')}}</h3>
                 </div>
                 <!-- /.box-header -->
                 <!-- form start -->
-                
+
 
                 @if ($patient)
                 <form class="form-horizontal" action="{{route('updatepatientdetails')}}" method="POST">
                     @csrf
                     <div class="box-body">
                         <div class="form-group">
-                            <label for="inputEmail3" class="col-sm-2 control-label">{{__('Full Name')}}</label>
+                            <label for="inputEmail3" class="col-sm-2 control-label">{{__('ФИО')}}</label>
                             <div class="col-sm-10">
                                 <input  value="{{$patient->name}}" type="text" required class="form-control" name="reg_pname"
                                     placeholder="Enter Patient Full Name">
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="inputEmail3" class="col-sm-2 control-label">{{__('NIC Number')}}</label>
+                            <label for="inputEmail3" class="col-sm-2 control-label">{{__('Номер полиса')}}</label>
                             <div class="col-sm-10">
                                 <input  value="{{$patient->nic}}" type="text" required class="form-control" name="reg_pnic"
                                     placeholder="National Identity Card Number">
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="inputPassword3" class="col-sm-2 control-label">{{__('Address')}}</label>
+                            <label for="inputPassword3" class="col-sm-2 control-label">{{__('Адрес')}}</label>
                             <div class="col-sm-10">
                                 <input  type="text" value="{{$patient->address}}" required class="form-control" name="reg_paddress"
                                     placeholder="Enter Patient Address ">
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="inputPassword3" class="col-sm-2 control-label">{{__('Telephone')}}</label>
+                            <label for="inputPassword3" class="col-sm-2 control-label">{{__('Контактный номер')}}</label>
                             <div class="col-sm-10">
                                 <input  value="{{$patient->telephone}}" type="tel" class="form-control" name="reg_ptel"
                                     placeholder="Patient Telephone Number">
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="inputPassword3" class="col-sm-2 control-label">{{__('Occupation')}}</label>
+                            <label for="inputPassword3" class="col-sm-2 control-label">{{__('Место работы')}}</label>
                             <div class="col-sm-10">
                                 <input  value="{{$patient->occupation}}" type="text" required class="form-control" name="reg_poccupation"
                                     placeholder="Enter Patient Occupation ">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputPassword3" class="col-sm-2 control-label">{{__('Диагноз')}}</label>
+                            <div class="col-sm-10">
+                                <input  value="{{$patient->nationality}}" type="text" required class="form-control" name="reg_poccupation"
+                                        placeholder="Enter Patient Occupation ">
                             </div>
                         </div>
 
                         <!-- select -->
                         <div class="form-group">
 
-                            <label class="col-sm-2 control-label">{{__('Sex')}}</label>
+                            <label class="col-sm-2 control-label">{{__('Пол')}}</label>
                             <div class="col-sm-2 mr-0 pr-0">
                                 <input  value="{{$patient->sex}}" type="text" required class="form-control" name="reg_psex"
                                     placeholder="Enter Patient Occupation ">
                             </div>
 
-                            <label class="col-sm-2 control-label">{{__('DOB')}}<span style="color:red">*</span></label>
+                            <label class="col-sm-2 control-label">{{__('Дата рождения')}}<span style="color:red">*</span></label>
                             <div class="col-sm-3">
                                 <div class="input-group date">
                                     <div class="input-group-addon">
@@ -89,7 +95,7 @@
                                 <input readonly value="{{$patient->id}}" type="text" class="form-control pull-right" name="reg_pid" style="display:none">
 
                             <div class="col-sm-3">
-                                        <button type="submit" class="btn btn-danger pull-right"><i class="fas fa-update"></i> Update </button>
+                                        <button type="submit" class="btn btn-danger pull-right"><i class="fas fa-update"></i> Сохранить </button>
                                 </div>
 
                         </div>

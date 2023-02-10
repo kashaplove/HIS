@@ -12,7 +12,7 @@ use App\Prescription;
 use App\Prescription_Medicine;
 use App\Ward;
 use Carbon\Carbon;
-use DB;
+use Illuminate\Support\Facades\DB;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -38,14 +38,14 @@ class PatientController extends Controller
 
     public function inPatientReportData(Request $request)
     {
-        $data=DB::table('inpatients')->whereDate('created_at', '=', $request->date)->get();
+        $data=DB::table('inpatients')->where('created_at', '=', date('d.m.Y', strtotime($request->date)))->get();
         if($data->count()>0){
             return view('patient.inpatient.inpatients', ["title" => "Inpatient Details","date"=>$request->date,"data_count"=>$data->count(), "data" => $data]);
 
         }else{
             return redirect(route("inPatientReport"))->with('fail',"No Results Found");
         }
-      
+
     }
 
     public function index()
@@ -76,7 +76,7 @@ class PatientController extends Controller
         if ($request->has('pid')) {
             return redirect()->route('patientProfile', $request->pid);
         } else {
-            return view('patient.profile.intro', ['title' => "Patient Profile"]);
+            return view('patient.profile.intro', ['title' => "Профиль пациента"]);
         }
     }
 
@@ -94,10 +94,10 @@ class PatientController extends Controller
     {
         $patient = Patients::withTrashed()->find($id);
         $hospital_visits = 1;
-        $status = "Active";
-        $last_seen = explode(" ", $patient->updated_at)[0];
+        $status = "Активный";
+        $last_seen = "01.01.2023";
         if ($patient->trashed()) {
-            $status = "Inactive";
+            $status = "Неактивный";
         }
         $hospital_visits += Prescription::where('patient_id', $patient->id)->count();
 
@@ -410,7 +410,7 @@ class PatientController extends Controller
     public function create_channel_view()
     {
         $user = Auth::user();
-        $appointments = DB::table('appointments')->join('patients', 'appointments.patient_id', '=', 'patients.id')->select('patients.name', 'appointments.number', 'appointments.patient_id')->whereRaw(DB::Raw('Date(appointments.created_at)=CURDATE()'))->orderBy('appointments.created_at', 'desc')->get();
+        $appointments = DB::table('appointments')->join('patients', 'appointments.patient_id', '=', 'patients.id')->select('patients.name', 'appointments.number', 'appointments.patient_id')->whereRaw(DB::Raw("Date(appointments.created_at)=DATE('now')"))->orderBy('appointments.created_at', 'desc')->get();
 
         return view('patient.create_channel_view', ['title' => "Channel Appointments", 'appointments' => $appointments]);
     }
@@ -472,10 +472,10 @@ class PatientController extends Controller
             ]);
         }
         }
-        
+
         else
         {
- 
+
         $patient = DB::table('patients')
                         ->join('appointments', 'patients.id', '=', 'appointments.patient_id')
                         ->select('patients.id as id', 'patients.name as name', 'patients.sex as sex', 'patients.address as address', 'patients.occupation as occ', 'patients.telephone as tel', 'patients.nic as nic', 'appointments.admit as ad', 'patients.bod as bod','appointments.number as appnum','appointments.doctor_id as D1')
@@ -519,7 +519,7 @@ class PatientController extends Controller
         $INPtable->patient_id = $request->reg_pid;
         $INPtable->ward_id = $request->reg_ipwardno;
         $INPtable->patient_inventory = $request->reg_ipinventory;
-    
+
         $INPtable->house_doctor = $request->reg_iphousedoc;
         $INPtable->approved_doctor = $request->reg_ipapprovedoc;
         $INPtable->disease = $request->reg_admitofficer1;
@@ -535,7 +535,7 @@ class PatientController extends Controller
         $newFB = $getFB->free_beds-=1;
         Ward::where('ward_no', $request->reg_ipwardno)->update(['free_beds' => $newFB]);
 
-      
+
         return redirect()->back()->with('regpsuccess', "Inpatient Successfully Registered");
     }
 
@@ -672,7 +672,7 @@ public function addChannel(Request $request)
     {
         // dd($result->reg_pbd);
         $user = Auth::user();
-        
+
         $query = DB::table('patients')
             ->where('id', $result->reg_pid)
             ->update(array(
@@ -684,16 +684,16 @@ public function addChannel(Request $request)
                 'nic' => $result->reg_pnic,
                 'telephone' => $result->reg_ptel,
             ));
-
+        $patient = Patients::where('id', $result->reg_pid)->first();
         if ($query) {
             //activity log
             activity()->performedOn($user)->log('Patient details updated!');
             return redirect()
-                ->route('searchPatient')
+                ->route('patientProfile', compact('patient'))
                 ->with('success', 'You have successfully updated patient details.');
         } else {
             return redirect()
-                ->route('searchPatient')
+                ->route('patientProfile', compact('patient'))
                 ->with('unsuccess', 'Error in Updating details !!!');
         }
 

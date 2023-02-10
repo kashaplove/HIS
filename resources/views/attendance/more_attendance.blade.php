@@ -7,7 +7,7 @@
 @section('breadcrumbs')
 
 <ol class="breadcrumb">
-    <li><a href="{{route('dash')}}"><i class="fas fa-tachometer-alt"></i>Dashboard</a></li>
+    <li><a href="{{route('dash')}}"><i class="fas fa-tachometer-alt"></i>Главная</a></li>
     <li class="active">Here</li>
 </ol>
 @endsection
